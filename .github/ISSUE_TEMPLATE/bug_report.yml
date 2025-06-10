@@ -1,0 +1,32 @@
+name: "🐛 Relato de Bug"
+description: "Reporte um problema ou comportamento inesperado."
+title: "[BUG]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: "Descrição do Bug"
+      description: "Seja claro e conciso ao descrever o problema."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: "Passos para Reproduzir"
+      description: "Como podemos reproduzir o erro? Forneça um passo a passo."
+      value: |
+        1. Acesse o endpoint '...' com os seguintes dados '...'
+        2. Execute o comando '...'
+        3. Veja o erro
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: "Comportamento Esperado"
+      description: "O que você esperava que acontecesse?"
+    validations:
+      required: true

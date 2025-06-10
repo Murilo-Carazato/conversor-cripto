@@ -1,0 +1,34 @@
+name: "✨ Solicitação de Funcionalidade"
+description: "Sugira uma ideia ou nova funcionalidade para o projeto."
+title: "[FEAT]: "
+labels: ["feature", "enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por contribuir com uma nova funcionalidade! Por favor, preencha os campos abaixo.
+
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: "Qual problema esta funcionalidade resolve?"
+      description: "Descreva o problema ou a necessidade que motiva a criação desta feature. Ex: 'O usuário não consegue ver seu histórico de conversões'."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution-description
+    attributes:
+      label: "Qual é a solução proposta?"
+      description: "Descreva a funcionalidade que você quer implementar. Ex: 'Criar um endpoint GET /conversions/history que retorna a lista de conversões do usuário logado'."
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: "Critérios de Aceite"
+      description: "Liste os pontos que precisam ser atendidos para que a tarefa seja considerada concluída."
+      value: |
+        - [ ] Critério 1
+        - [ ] Critério 2
