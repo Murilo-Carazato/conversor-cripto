@@ -11,11 +11,12 @@ body:
     validations:
       required: true
 
-  - type: checkboxes
+  - type: textarea
     id: acceptance-criteria
     attributes:
       label: "Checklist de Tarefas"
-      description: "Liste as subtarefas ou itens a serem verificados."
-      options:
-        - label: "Item 1 a ser concluído"
-        - label: "Item 2 a ser concluído"
+      description: "Liste as subtarefas ou itens a serem verificados. Você pode editar esta lista."
+      value: |
+        - [ ] Item 1 a ser concluído
+        - [ ] Item 2 a ser concluído
+        - [ ] Item 3 a ser concluído
