@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int          @id @default(autoincrement())
+  email      String       @unique
+  password   String
+  name       String?
+  conversions Conversion[]
+  favorites  Favorite[]
+}
+
+model Conversion {
+  id          Int      @id @default(autoincrement())
+  fromCurrency String
+  amount      Float
+  resultBRL   Float
+  resultUSD   Float
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+model Favorite {
+  id          Int      @id @default(autoincrement())
+  currencyId  String   // Ex: 'bitcoin', 'ethereum'
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
+
+  @@unique([userId, currencyId]) // Um usuário só pode favoritar uma moeda uma vez
+}
