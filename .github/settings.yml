@@ -1,0 +1,10 @@
+repository:
+  name: conversor-cripto
+  description: API de backend para um simulador de conversão de criptomoedas, desenvolvida para o desafio técnico Nexus.
+  topics: nestjs, typescript, prisma, docker, api, backend
+  has_wiki: false
+  default_branch: main
+  delete_branch_on_merge: true
+  allow_squash_merge: true
+  allow_merge_commit: false
+  allow_rebase_merge: false

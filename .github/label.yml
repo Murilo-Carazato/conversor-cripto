@@ -1,0 +1,12 @@
+auth:
+  - src/auth/**/*
+  - src/users/**/*
+
+database:
+  - prisma/schema.prisma
+
+ci-cd:
+  - .github/workflows/*
+
+documentation:
+  - "**/*.md"

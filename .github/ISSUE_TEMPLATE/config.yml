@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Guia de Gestão e Workflow do Projeto
+    url: https://github.com/Murilo-Carazato/conversor-cripto/blob/main/PROJECT_WORKFLOW.md
+    about: Antes de abrir uma issue, por favor, consulte nosso guia de processos.
