@@ -25,10 +25,16 @@
       "parameters": {
         "required_status_checks": [
           {
-            "context": "test" 
+            "context": "test-and-lint"
           }
         ],
         "strict_required_status_checks_policy": true
+      }
+    },
+    {
+      "type": "required_code_scanning_results",
+      "parameters": {
+        "security_severity_level": "high"
       }
     },
     {
