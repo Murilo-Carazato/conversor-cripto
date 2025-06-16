@@ -7,8 +7,14 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
+      issues: write
+
     steps:
-      - uses: actions/labeler@v5
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run Labeler
+        uses: actions/labeler@v5
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           sync-labels: false
