@@ -8,11 +8,13 @@ on:
       - ".github/labels.yml"
   workflow_dispatch:
 
+permissions:
+  contents: read  
+  issues: write 
+
 jobs:
   sync-labels:
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,6 +22,5 @@ jobs:
       - name: Sync GitHub Labels
         uses: EndBug/label-sync@v2
         with:
-          token: "${{ secrets.GITHUB_TOKEN }}"
           config-file: ".github/labels.yml"
           delete-other-labels: true
