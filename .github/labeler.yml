@@ -1,33 +1,23 @@
 auth:
-  - "src/auth/**/*"
-  - "src/users/**/*"
+  - changed-files:
+    - any-glob-to-any-file: ['src/auth/**/*', 'src/users/**/*']
 
 database:
-  - "prisma/**/*"
-  - "**/*prisma*"
+  - changed-files:
+    - any-glob-to-any-file: ['prisma/**/*']
 
-ci-cd:
-  - ".github/workflows/*"
-  - ".github/**/*"
-  - "docker*"
-  - "Dockerfile*"
+'ci-cd':
+  - changed-files:
+    - any-glob-to-any-file: ['.github/workflows/*', 'Dockerfile', 'docker-compose.yml']
 
 documentation:
-  - "**/*.md"
-  - "docs/**/*"
+  - changed-files:
+    - any-glob-to-any-file: ['**/*.md']
 
 dependencies:
-  - "package.json"
-  - "package-lock.json"
-  - "yarn.lock"
-
-feature:
-  - "src/**/*.controller.ts"
-  - "src/**/*.service.ts"
-  - "src/**/*.module.ts"
+  - changed-files:
+    - any-glob-to-any-file: ['package.json', 'pnpm-lock.yaml']
 
 chore:
-  - "src/**/*.spec.ts"
-  - "test/**/*"
-  - "*.config.*"
-  - ".*"
+  - changed-files:
+    - any-glob-to-any-file: ['test/**/*', '*.config.js', '.prettierrc.json', '.editorconfig']
