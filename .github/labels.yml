@@ -1,0 +1,51 @@
+- name: "bug"
+  color: "d73a4a"
+  description: "Algo não está funcionando como o esperado."
+
+- name: "chore"
+  color: "c5def5"
+  description: "Tarefas de manutenção, configuração ou outras tarefas não funcionais."
+
+- name: "ci-cd"
+  color: "1d76db"
+  description: "Relacionado à Integração Contínua e Deploy Contínuo."
+
+- name: "database"
+  color: "f9d0c4"
+  description: "Relacionado a mudanças no banco de dados ou Prisma."
+
+- name: "dependencies"
+  color: "0366d6"
+  description: "Relacionado a atualizações de dependências."
+
+- name: "documentation"
+  color: "0075ca"
+  description: "Melhorias ou adições à documentação."
+
+- name: "enhancement"
+  color: "a2eeef"
+  description: "Melhoria em uma funcionalidade existente."
+
+- name: "feature"
+  color: "5319e7"
+  description: "Uma nova funcionalidade para o usuário final."
+
+- name: "auth"
+  color: "9370db"
+  description: "Relacionado ao módulo de autenticação ou usuários."
+
+- name: "P0: Crítico"
+  color: "b60205"
+  description: "Prioridade máxima, deve ser feito agora."
+
+- name: "P1: Alto"
+  color: "d93f0b"
+  description: "Prioridade alta."
+
+- name: "P2: Médio"
+  color: "fbca04"
+  description: "Prioridade média."
+
+- name: "stale"
+  color: "e3d9c4"
+  description: "Issue ou PR sem atividade por um longo período."
