@@ -2,7 +2,7 @@ name: OSSF Scorecard
 
 on:
   schedule:
-    - cron: '30 2 * * 6' # Roda todo Sábado às 02:30 UTC
+    - cron: '30 2 * * 6' # Todo Sábado às 02:30 UTC
   push:
     branches: [main]
 
@@ -21,16 +21,12 @@ jobs:
           persist-credentials: false
 
       - name: "Run analysis"
-        uses: ossf/scorecard-action@v2
-        with:
-          results_file: results.sarif
-          results_format: sarif
-          publish_results: true
+        uses: ossf/scorecard-action@v2.4.2
 
       - name: "Upload artifact"
         uses: actions/upload-artifact@v4
         with:
-          name: SARIF file
+          name: SARIF-file
           path: results.sarif
           retention-days: 5
 
