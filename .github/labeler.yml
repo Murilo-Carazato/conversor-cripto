@@ -1,12 +1,33 @@
 auth:
-  - 'src/auth/**/*'
-  - 'src/users/**/*'
+  - "src/auth/**/*"
+  - "src/users/**/*"
 
 database:
-  - 'prisma/schema.prisma'
+  - "prisma/**/*"
+  - "**/*prisma*"
 
-'ci-cd':
-  - '.github/workflows/*'
+ci-cd:
+  - ".github/workflows/*"
+  - ".github/**/*"
+  - "docker*"
+  - "Dockerfile*"
 
 documentation:
-  - '**/*.md'
+  - "**/*.md"
+  - "docs/**/*"
+
+dependencies:
+  - "package.json"
+  - "package-lock.json"
+  - "yarn.lock"
+
+feature:
+  - "src/**/*.controller.ts"
+  - "src/**/*.service.ts"
+  - "src/**/*.module.ts"
+
+chore:
+  - "src/**/*.spec.ts"
+  - "test/**/*"
+  - "*.config.*"
+  - ".*"
