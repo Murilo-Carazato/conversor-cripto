@@ -1,3 +1,4 @@
+
 name: Labeler
 on: [pull_request_target]
 
@@ -5,9 +6,16 @@ jobs:
   label:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
+      issues: write
+
     steps:
-      - uses: actions/labeler@v5
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run Labeler
+        uses: actions/labeler@v5
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          sync-labels: false
