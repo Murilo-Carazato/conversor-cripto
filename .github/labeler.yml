@@ -1,0 +1,23 @@
+auth:
+  - changed-files:
+    - any-glob-to-any-file: ['src/auth/**/*', 'src/users/**/*']
+
+database:
+  - changed-files:
+    - any-glob-to-any-file: ['prisma/**/*']
+
+'ci-cd':
+  - changed-files:
+    - any-glob-to-any-file: ['.github/workflows/*', 'Dockerfile', 'docker-compose.yml']
+
+documentation:
+  - changed-files:
+    - any-glob-to-any-file: ['**/*.md']
+
+dependencies:
+  - changed-files:
+    - any-glob-to-any-file: ['package.json', 'pnpm-lock.yaml']
+
+chore:
+  - changed-files:
+    - any-glob-to-any-file: ['test/**/*', '*.config.js', '.prettierrc.json', '.editorconfig']
