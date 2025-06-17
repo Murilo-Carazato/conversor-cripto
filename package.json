@@ -71,5 +71,11 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  
+  "pnpm": {
+    "overrides": {
+      "brace-expansion": "^1.1.12"
+    }
   }
 }
