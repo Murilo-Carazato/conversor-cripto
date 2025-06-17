@@ -3,6 +3,11 @@
 FROM node:20-alpine AS base
 WORKDIR /usr/src/app
 
+# <<< ADICIONE ESTA LINHA AQUI >>>
+# Instala o pnpm globalmente para que possa ser usado nos estágios seguintes
+# hadolint ignore=DL3016
+RUN npm install -g pnpm
+
 # --- Dependencies Stage ---
 # Prepara e instala apenas as dependências de produção para otimizar o cache
 FROM base AS dependencies
