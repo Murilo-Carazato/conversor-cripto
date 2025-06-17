@@ -32,16 +32,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Docker image
+      # Passo de Build e Push combinado
+      - name: Build and push Docker image
         id: docker_build
         uses: docker/build-push-action@v6
         with:
           context: .
-          push: false
-          load: true
+          push: true # ALTERADO: Agora faz o push diretamente
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
+      # O scan agora verifica a imagem que já foi enviada para o registry
       - name: Scan image with Trivy
         uses: aquasecurity/trivy-action@master
         with:
@@ -50,9 +51,3 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
-
-      - name: Push image if scan passes
-        run: |
-          for tag in ${{ steps.meta.outputs.tags }}; do
-            docker push $tag
-          done
