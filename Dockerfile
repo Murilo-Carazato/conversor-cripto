@@ -2,11 +2,8 @@
 FROM node:20-alpine AS base
 WORKDIR /usr/src/app
 
-# Atualiza o npm para a versão mais recente para corrigir vulnerabilidades internas
-RUN npm install -g npm@latest
-
-# Instala o pnpm globalmente
-RUN npm install -g pnpm
+# Atualiza o npm e instala o pnpm em um único comando para otimizar as camadas
+RUN npm install -g npm@latest pnpm
 
 # Estágio para instalar as dependências de produção
 FROM base AS dependencies
@@ -37,5 +34,4 @@ COPY --from=builder /usr/src/app/prisma ./prisma
 EXPOSE 3000
 
 # Comando para iniciar a aplicação
-
 CMD ["node", "dist/main.js"]
