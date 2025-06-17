@@ -1,41 +1,36 @@
-# --- Base Stage ---
-# Define uma imagem base leve e segura para Node.js
+# Estágio base com Node.js Alpine
 FROM node:20-alpine AS base
 WORKDIR /usr/src/app
 
-# <<< ADICIONE ESTA LINHA AQUI >>>
-# Instala o pnpm globalmente para que possa ser usado nos estágios seguintes
-# hadolint ignore=DL3016
-RUN npm install -g pnpm
+# Atualiza o npm e instala o pnpm em um único comando para otimizar as camadas
+RUN npm install -g npm@latest pnpm
 
-# --- Dependencies Stage ---
-# Prepara e instala apenas as dependências de produção para otimizar o cache
+# Estágio para instalar as dependências de produção
 FROM base AS dependencies
 COPY package.json pnpm-lock.yaml ./
-# hadolint ignore=DL3016
+# Usa o cache do pnpm para acelerar a instalação
 RUN --mount=type=cache,target=/root/.pnpm/store pnpm fetch --prod
 RUN pnpm install --prod --no-frozen-lockfile
 
-# --- Builder Stage ---
-# Instala todas as dependências (incluindo as de desenvolvimento) e constrói a aplicação
+# Estágio para construir a aplicação
 FROM base AS builder
 COPY . .
-# hadolint ignore=DL3016
-# Consolida múltiplos comandos em um único RUN para reduzir as camadas da imagem (corrige DL3059)
+# Usa o cache do pnpm, instala todas as dependências (incluindo devDependencies) e roda os scripts
 RUN --mount=type=cache,target=/root/.pnpm/store \
     pnpm install --no-frozen-lockfile && \
     pnpm prisma generate && \
     pnpm build
 
-# --- Production Stage ---
-# Monta a imagem final, copiando apenas os artefatos necessários das etapas anteriores
+# Estágio final de produção, otimizado e menor
 FROM base AS production
+# Copia as dependências de produção já instaladas
 COPY --from=dependencies /usr/src/app/node_modules ./node_modules
+# Copia os artefatos da build
 COPY --from=builder /usr/src/app/dist ./dist
-# Copia o schema do Prisma, necessário em tempo de execução
+# Copia a pasta do Prisma (necessária em tempo de execução)
 COPY --from=builder /usr/src/app/prisma ./prisma
 
-# Expõe a porta que a aplicação usará
+# Expõe a porta da aplicação
 EXPOSE 3000
 
 # Comando para iniciar a aplicação
