@@ -6,6 +6,7 @@ settings:
 
 overrides:
   brace-expansion: ^1.1.12
+  cross-spawn: ^7.0.5
 
 importers:
 
