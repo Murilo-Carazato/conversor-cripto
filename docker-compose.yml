@@ -1,0 +1,56 @@
+# docker-compose.yml
+# Arquivo de orquestração para o ambiente de desenvolvimento local.
+
+version: '3.8' # Define a versão da sintaxe do Docker Compose
+
+services:
+  # Serviço 1: A nossa API NestJS
+  api:
+    # 'build: .' diz ao Compose para construir a imagem usando o Dockerfile na pasta atual.
+    # É aqui que a "mágica" acontece, conectando este arquivo ao seu Dockerfile.
+    build: .
+    container_name: nexus_api
+    ports:
+      # Mapeia a porta 3000 do contêiner para a porta 3000 da sua máquina.
+      - "3000:3000"
+    environment:
+      # Passa as variáveis de ambiente necessárias para a aplicação.
+      # Note que o host do banco de dados é 'db', o nome do serviço do MySQL abaixo.
+      DATABASE_URL: "mysql://root:password@db:3306/nexus_db"
+      JWT_SECRET: "seu-jwt-secret-super-secreto-para-desenvolvimento"
+    volumes:
+      # Mapeia o código-fonte local para dentro do contêiner.
+      # Isso permite o "hot-reloading": quando você salva um arquivo, o NestJS reinicia automaticamente.
+      - .:/app
+      # Adicionamos um volume anônimo para node_modules para evitar que a pasta local
+      # sobrescreva os módulos instalados dentro do contêiner.
+      - /app/node_modules
+    depends_on:
+      # Garante que o serviço 'db' seja iniciado ANTES do serviço 'api'.
+      # Isso evita que a API falhe ao tentar se conectar a um banco que ainda não está pronto.
+      - db
+
+  # Serviço 2: O nosso banco de dados MySQL
+  db:
+    # Usa uma imagem oficial do MySQL, não precisamos criar um Dockerfile para ele.
+    image: mysql:8.0
+    container_name: nexus_db
+    # 'restart: always' garante que o contêiner do banco sempre reinicie se ele parar por algum motivo.
+    restart: always
+    environment:
+      # Define as credenciais e o nome do banco de dados inicial.
+      # Estes valores DEVEM ser os mesmos usados na DATABASE_URL do serviço 'api'.
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: nexus_db
+    ports:
+      # Mapeia a porta 3306 do contêiner para a porta 3307 da sua máquina.
+      # Usamos 3307 para evitar conflitos caso você já tenha um MySQL rodando na porta 3306 localmente.
+      - "3307:3306"
+    volumes:
+      # 'mysql_data' é um "volume nomeado". Ele garante que os dados do seu banco
+      # sejam salvos no seu disco e não sejam perdidos ao reiniciar os contêineres.
+      - mysql_data:/var/lib/mysql
+
+# Declaração do volume nomeado que será usado pelo serviço 'db'.
+volumes:
+  mysql_data:
